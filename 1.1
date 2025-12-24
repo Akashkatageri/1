@@ -1,40 +1,64 @@
-
 import csv
 
 def load_csv(filename):
+    """Load CSV file into a list of dictionaries"""
+    with open(filename, "r", newline="") as f:
+        reader = csv.DictReader(f)
+        return list(reader)
 
-into a list of dictionaries open (filename, "r", newline="") as f:
-
-reader = csv.DictReader(f) = [row for row in reader]
-
-convert_to_float(value):
-
-#Try convertin
-
-eturn float(value)
-
-except ValueError:
+def convert_to_float(value):
+    """Try converting a value to float"""
+    try:
+        return float(value)
+    except ValueError:
+        return None
 
 def summarize(data, column, operation):
+    """Perform max, min, or average on a column"""
+    values = [
+        convert_to_float(row[column])
+        for row in data
+        if convert_to_float(row[column]) is not None
+    ]
 
-n summary operation on a colum [convert_to_float(row [column]) for row in data if convert_to_float(row[column])
+    if not values:
+        return f"No numeric data found in column '{column}'"
 
-if not values:
+    if operation == "max":
+        return max(values)
+    elif operation == "min":
+        return min(values)
+    elif operation == "average":
+        return sum(values) / len(values)
+    else:
+        return "Invalid operation"
 
-return f"No numeric data found in column '(column)
+# ---------------- MAIN PROGRAM ----------------
 
-return m
+try:
+    filename = input("Enter CSV filename (with .csv extension): ")
+    data = load_csv(filename)
 
-elif operation ==
+    if not data:
+        print("CSV file is empty or invalid.")
+        exit()
 
-values)
+    print("\nAvailable columns:", list(data[0].keys()))
 
-if oper "average": sum (values) / len(values)
+    while True:
+        column = input("\nEnter column name for summary (or 'exit' to quit): ")
+        if column.lower() == "exit":
+            break
 
-id operation"
+        operation = input("Enter operation (max/min/average): ").lower()
 
-#Main program
+        result = summarize(data, column, operation)
+        print(f"{operation.upper()} of '{column}': {result}")
 
+except FileNotFoundError:
+    print("Error: File not found.")
+except KeyError:
+    print("Error: Column not found.")
 filename = input("Enter (with .csv extension): ")
 
 = load_csv(filename)
