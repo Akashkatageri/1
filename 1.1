@@ -1,0 +1,60 @@
+
+import csv
+
+def load_csv(filename):
+
+into a list of dictionaries open (filename, "r", newline="") as f:
+
+reader = csv.DictReader(f) = [row for row in reader]
+
+convert_to_float(value):
+
+#Try convertin
+
+eturn float(value)
+
+except ValueError:
+
+def summarize(data, column, operation):
+
+n summary operation on a colum [convert_to_float(row [column]) for row in data if convert_to_float(row[column])
+
+if not values:
+
+return f"No numeric data found in column '(column)
+
+return m
+
+elif operation ==
+
+values)
+
+if oper "average": sum (values) / len(values)
+
+id operation"
+
+#Main program
+
+filename = input("Enter (with .csv extension): ")
+
+= load_csv(filename)
+
+orint("CSV file is empty or invalid.")
+
+rint("\nAvailable columns:", list(data[0].keys()))
+
+vhile True
+
+column = input("\nEnter column name for summary (or 'exit' to quit): ")
+
+fcolumn.lower()
+
+operation = input("Enter operation (max/min/average): ").lower() result = summarize (data, column, operation)
+
+print(f"(operation.upper()} of '(column): {result)")
+
+except FileNotFoundError:
+
+t("Error: File not found.")
+
+Output:.
